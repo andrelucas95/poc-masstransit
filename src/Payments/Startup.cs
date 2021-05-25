@@ -38,6 +38,7 @@ namespace Payments
                 });
             });
             
+            services.AddMassTransitHostedService();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -1,5 +1,7 @@
+using System;
 using System.Threading.Tasks;
 using Core.IntegrationEvents.IntegrationEvents;
+using Core.IntegrationEvents.IntegrationEvents.Factories;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -22,10 +24,11 @@ namespace Payments.Controllers
         public async Task<IActionResult> ProcessPayment()
         {
             //Domain process
-            var payment = new PaymentCreated("José", "jose@fakemail.com", 100);
             
-            await _bus.Publish<PaymentCreated>(payment);
-            _logger.LogInformation($"Payment {payment.Id} created");
+            var paymentId = Guid.NewGuid();
+            
+            await _bus.Publish<PaymentCreated>(PaymentFactory.Created(paymentId, "José", "jose@fakemail.com", 100));
+            _logger.LogInformation($"Payment id: {paymentId} created message published!");
 
 
             return Ok();

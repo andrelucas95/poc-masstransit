@@ -1,6 +1,6 @@
 namespace Core.IntegrationEvents.IntegrationEvents
 {
-    public abstract class IntegrationEvent
+    public interface IntegrationEvent
     {
         
     }

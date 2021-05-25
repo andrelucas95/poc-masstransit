@@ -20,13 +20,14 @@ namespace Notifications.Consumers
             try
             {
                 var payment = context.Message;
-                _logger.LogInformation($"Payment {payment.Id} created message received");
+                _logger.LogInformation($"Payment id: {payment.Id} created message received!");
                 
                 // Send email notification
             }
             catch(Exception ex)
             {
                 _logger.LogError("Error on consume payment created", ex);
+                throw;
             }
             
             return Task.CompletedTask;
